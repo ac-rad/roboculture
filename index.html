@@ -90,7 +90,7 @@
           <h1 class="title is-1 publication-title">RoboCulture: A Robotics Platform for Automated Biological Experimentation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="">Kevin Angers</a><sup>1*†</sup>,</span>
+              <a href="">Kevin Angers</a><sup>1*</sup>,</span>
             <span class="author-block">
               <a href="">Kourosh Darvish</a><sup>1,2,4</sup>,</span>
             <span class="author-block">
@@ -106,7 +106,7 @@
               <a href="">Ilya Yakavets</a><sup>1,4</sup>,
             </span>
             <span class="author-block">
-              <a href="">Florian Shkurti</a><sup>1,2,4*</sup>
+              <a href="">Florian Shkurti</a><sup>1,2,4*†</sup>
             </span>
             <span class="author-block">
               <a href="">Alán Aspuru-Guzik</a><sup>1,2,4,5,6*</sup>
@@ -128,15 +128,15 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
-              <!-- <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2505.14941"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
                 </a>
-              </span> -->
+              </span>
               <!-- <span class="link-block">
                 <a href="https://arxiv.org/abs/2011.12948"
                    class="external-link button is-normal is-rounded is-dark">
@@ -184,19 +184,19 @@
   </div>
 </section>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
+<!-- <section class="hero teaser"> -->
+  <!-- <div class="container is-max-desktop"> -->
+    <!-- <div class="hero-body"> -->
       <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
         <source src="./static/videos/teaser.mp4"
                 type="video/mp4">
       </video> -->
-      <h2 class="subtitle has-text-centered">
-        Content coming soon
-      </h2>
-    </div>
-  </div>
-</section>
+      <!-- <h2 class="subtitle has-text-centered"> -->
+        <!-- Content coming soon -->
+      <!-- </h2> -->
+    <!-- </div> -->
+  <!-- </div> -->
+<!-- </section> -->
 
 
 <!-- <section class="hero is-light is-small">
@@ -260,52 +260,34 @@
 <section class="section">
   <div class="container is-max-desktop">
     <!-- Abstract. -->
-    <!-- <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
+            Automating biological experimentation remains challenging due to the need for millimeter-scale precision, long and multi-step experiments, and the dynamic nature of living systems. Current liquid handlers only partially automate workflows, requiring human intervention for plate loading, tip replacement, and calibration. Industrial solutions offer more automation but are costly and lack the flexibility needed in research settings. Meanwhile, research in autonomous robotics has yet to bridge the gap for long-duration, failure-sensitive biological experiments. 
           </p>
           <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
+            We introduce RoboCulture, a cost-effective and flexible platform that uses a general-purpose robotic manipulator to automate key biological tasks. RoboCulture performs liquid handling, interacts with lab equipment, and leverages computer vision for real-time decisions using optical density-based growth monitoring. We demonstrate a fully autonomous 15-hour yeast culture experiment where RoboCulture uses vision and force feedback and a modular behavior tree framework to robustly execute, monitor, and manage experiments.
           </p>
         </div>
       </div>
-    </div> -->
+    </div>
     <!--/ Abstract. -->
 
     <!-- Paper video. -->
-    <!-- <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+        <video id="S9" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/S9.mov"
+                  type="video/mp4">
+        </video>
+        <p>
+          RoboCulture performing cell expansion (30x speed). After completing the optical density monitoring procedure, the robot initiates the well-splitting process. It first retrieves the pipette from its stand and attaches a fresh pipette tip. Growth media is then aspirated and dispensed into 18 empty wells. The robot proceeds by resuspending the first saturated well and distributing its contents into three of the pre-filled wells, followed by the disposal of the used pipette tip. For each of the remaining five saturated wells, a new pipette tip is attached, used, and discarded in sequence.
+        </p>
       </div>
-    </div> -->
+    </div>
     <!--/ Paper video. -->
   </div>
 </section>
@@ -313,50 +295,137 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-
+    <h3 class="title is-4">Pipette Tip Attachment and Dettachment</h3>
     <div class="columns is-centered">
 
-      <!-- Visual Effects. -->
-      <!-- <div class="column">
+      <!-- Pipette Tip Attachment -->
+      <div class="column">
         <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
+          <!-- <h2 class="title is-3">Pipette Tip Attachment</h2> -->
           <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
+            RoboCulture cleverly attaches new pipette tips using a spiral motion and force feedback. 
           </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
+          <video id="S2" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/S2.mov"
                     type="video/mp4">
           </video>
         </div>
-      </div> -->
-      <!--/ Visual Effects. -->
+      </div>
+      <!--/ Pipette Tip Attachment -->
 
-      <!-- Matting. -->
-      <!-- <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
+      <!-- Pipette Tip Dettachment -->
+      <div class="column">
+        <div class="content">
+          <!-- <h2 class="title is-3">Pipette Tip Dettachment</h2> -->
+          <p>
+            The contaminated pipette is removed using a 3D-printed pipette tip remover.
+          </p>
+          <video id="S3" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/S3.mov"
+                    type="video/mp4">
+          </video>
         </div>
       </div>
-    </div> -->
-    <!--/ Matting. -->
+    </div>
+
+
+
+    <h3 class="title is-4">Visual Feedback for Liquid Handling</h3>
+    <div class="columns is-centered">
+
+      <!-- Pipette Tip Attachment -->
+      <div class="column">
+        <div class="content">
+          <!-- <h2 class="title is-3">Visual Effects</h2> -->
+          <p>
+            Using a camera mounted on the robot, RoboCulture perceives the positions of the wells and the pipette tip. This video shows the perception output while moving the robot arm manually. 
+          </p>
+          <div style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden;">
+            <video 
+              id="S5" 
+              autoplay 
+              controls 
+              muted 
+              loop 
+              playsinline 
+              style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%;">
+              <source src="./static/videos/S5.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <!--/ Pipette Tip Attachment -->
+
+      <!-- Pipette Tip Dettachment -->
+      <div class="column">
+        <div class="content">
+          <!-- <h2 class="title is-3">Visual Effects</h2> -->
+          <p>
+            Even under disturbances, RoboCulture can accurately detect the position of the wells and reposition the pipette tip accordingly.
+          </p>
+          <video id="S6" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/S6.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+
+
+    <h3 class="title is-4">Optical Density Perception</h3>
+    <div class="columns is-centered">
+
+      <!-- Pipette Tip Attachment -->
+      <div class="column">
+        <div class="content">
+          <!-- <h2 class="title is-3">Visual Effects</h2> -->
+          <p>
+            RoboCulture also uses its camera to monitor the growth of the yeast culture and make experiment decisions based on the optical density of the wells. The robot pans across the well plate to capture images of the wells at regular intervals.
+          </p>
+          <video id="S7" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/S7.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!--/ Pipette Tip Attachment -->
+
+      <!-- Pipette Tip Dettachment -->
+      <div class="column">
+        <div class="content">
+          <!-- <h2 class="title is-3">Visual Effects</h2> -->
+          <p>
+            By imaging the wells at multiple intervals, RoboCulture constructs a growth curve for each well, informing its decision to split the wells.
+          </p>
+          <video id="S13" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/S13.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6"></div>
+
+    <h3 class="title is-4">Well Passaging Close Up</h3>
+    <video id="S11" autoplay controls muted loop playsinline height="50%">
+      <source src="./static/videos/S11.mov"
+              type="video/mp4">
+    </video>
+
+    <!--/ Pipette Tip Dettachment -->
+
+  </div>
+</div>
+<!--/ Pipette Tip Dettachment -->
+</div>
 
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
         <!-- <h2 class="title is-3">Animation</h2> -->
-
+        
         <!-- Interpolating. -->
         <!-- <h3 class="title is-4">Interpolating states</h3>
         <div class="content has-text-justified">
@@ -448,17 +517,20 @@
 </section>
 
 
-<!-- <section class="section" id="BibTeX">
+<section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@article{angers2025roboculture,
+      title={RoboCulture: A Robotics Platform for Automated Biological Experimentation}, 
+      author={Kevin Angers and Kourosh Darvish and Naruki Yoshikawa and Sargol Okhovatian and Dawn Bannerman and Ilya Yakavets and Florian Shkurti and Alán Aspuru-Guzik and Milica Radisic},
+      year={2025},
+      eprint={2505.14941},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2505.14941}, 
 }</code></pre>
   </div>
-</section> -->
+</section>
 
 
 <!-- <footer class="footer">
