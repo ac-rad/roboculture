@@ -1,0 +1,3 @@
+[submodule "FastSAM"]
+	path = FastSAM
+	url = https://github.com/ac-rad/FastSAM.git
