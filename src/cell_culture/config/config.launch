@@ -1,0 +1,3 @@
+<launch>
+    <rosparam file="src/cell_culture/config/config.yaml" command="load"/>
+</launch>

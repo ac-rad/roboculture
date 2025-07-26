@@ -1,0 +1,8 @@
+# Define goal (what the client sends to the control node)
+int16 image # index of imaging
+---
+# Define result (what the node returns upon completion)
+bool success  # true if perception succeeds (able to find requested item)
+---
+# Define feedback (optional, sent during action execution)
+string status

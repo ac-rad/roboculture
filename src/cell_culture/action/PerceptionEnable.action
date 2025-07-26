@@ -1,0 +1,12 @@
+# Define goal (what the client sends to the control node)
+string target # april-tag, well
+string num # april tag id, well number
+float32 x_offset # offset from target's location
+float32 y_offset
+float32 z_offset
+---
+# Define result (what the node returns upon completion)
+bool success  # true if perception succeeds (able to find requested item)
+---
+# Define feedback (optional, sent during action execution)
+string status

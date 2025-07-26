@@ -1,0 +1,54 @@
+# config.yaml
+perception:
+  model_path: "./weights/FastSAM-x.pt" # Path to FastSAM weights
+  perception_method: "edge" # edge or april_tag
+  plate_prompt: "microplate" # microplate
+  preprocess_image: True
+  desired_well: 0 # Desired well to move to. 0 is top left, 7 is bottom left, 88 is top right, 95 is bottom right
+  using_kalman_filter: False # True = Use Kalman filter to smooth trajectory
+  using_well_monitoring: False # True = Track images of wells for detecting contents over time
+  prompt_points: [[443, 20], [419, 99]] # Prompt points to use for pipette segmentation. If `[]`: a window will pop up to select them.
+
+
+control:
+  rate: 500 # Rate of control loop in Hz
+  kp: 0.0007 # Proportional gain for PID controller (np.eye(2) * kp)
+  kd: 0.00001 # Derivative gain for PID controller (np.eye(2) * kd)
+  ki: 0.00001 # Integral gain for PID controller (np.eye(2) * ki)
+  target_z: 0.504 # Target z position for pipette tip (panda_link_0 -> panda_hand) : 0.409 on table, 0.504 on scale
+  init_pose_media: [ 0.41202604, -0.18653185,  0.38743793] # Starting pose relative to reset pose (franka_tool to world) (x, y, z) [ 0.41202604 -0.18653185  0.38743793]
+  init_pose_plate: [0.46041651, 0.10101492, 0.42765366] # Starting pose relative to reset pose (franka_tool to world) (x, y, z) : [0.2, 0, -0.15] [0.46041651 0.10101492 0.42765366]
+  lower_into_media_dist: 0.085 # Distance to lower pipette into media
+  lower_height: 0.01 # Amount to lower pipette tip for insertion
+  
+  translational_stiffnesses: [3000.0, 2000.0, 1000.0] # Stiffnesses for translational directions (x, y, z)
+  rotational_stiffnesses: [100.0,100.0,50.0] 
+
+pipette:  
+  pipette_port: "/dev/ttyACM1"
+  pipette_extended: 1850
+  pipette_retracted: 1300
+  pipette_increment: 15
+
+plate:
+  plate_type: 96 # 96, 24, 6
+  plate_dist: [9.1, 19.2, 38.67] # Distance between centers of wells in each well plate [96, 24, 6] (mm)
+  plate_left_offset: [14.3, 14.7, 24.8] # Distance from left edge to center of first column in each well plate [96, 24, 6] (mm)
+  plate_up_offset: [11.36, 14.1, 22.32] # Distance from top edge to center of first row in 96 well plate [96, 24, 6] (mm)
+
+  plate_length: 127.89 # Length of well plate in mm
+  plate_width: 85.50 # Width of well plate in mm
+
+
+global_parameters:
+  with_robot: True # True = Using Franka robot
+  live_inference: True # True = Live inference (using webcam), False = inference on video (defined by video_name)
+  
+  using_pipette: True
+  using_pipette_liquid: False
+  using_scale: False
+  using_shaker: False
+  is_aspiration: False # True = Aspiration, False = Dispense
+
+  classification_dataset_mode: False
+  center_cam_coord: [320, 300]

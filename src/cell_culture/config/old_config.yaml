@@ -1,0 +1,49 @@
+# Paths
+model_path: "./weights/FastSAM-x.pt" # Path to FastSAM weights
+video_name: "96-with-robot.webm" # Path to video (used if liveInference is False)
+
+# Values
+well_plate: 96 # Well plate size
+desired_well: 7 # Desired well to move to
+initial_lower_height: 0.16 # Amount to lower end effector when beginning
+
+# Constants
+plate_length: 127.15 # Length of well plate in mm
+plate_width: 85.05 # Width of well plate in mm
+region_size_96: 11 # Size of individual well region for 96 well plate in pixels 
+region_size_24: 19 # Size of individual well region for 24 well plate in pixels 
+roi_distance_from_center: 100 # Distance from center of image to region of interest to record well image, in pixels
+
+# Settings
+perception_method: "edge" # edge or april_tag
+with_pipette: True # True = Segment pipette and find pipette tip
+with_robot: True # True = Using Franka robot
+with_control: True # True = Control robot, False = Only detection
+with_kalman_filtering: False # True = Use Kalman filter to smooth trajectory
+with_well_tracking: False # True = Track images of wells for detecting contents over time
+live_inference: True # True = Live inference (using webcam), False = inference on video (defined by video_name)
+mask_far_edges: True  # True = edges far from a bounding box are masked, helps with clutter in scene
+initial_segment: True # True = Use SAM to find the well plates on start, helps with clutter in scene
+use_rs_pipeline: False # True = Use RealSense pipeline from pyrealsense2, False = Use perception.realsense_sensor's RealSenseSensor class
+prompt_points: [[425, 33], [402, 111]] # Prompt points to use for pipette segmentation. If `[]`: a window will pop up to select them.
+
+# Control settings
+dt: 0.001 # Time step for simulation
+kp: 0.03 # Proportional gain for PID controller (np.eye(2) * kp)
+kd: 0 # Derivative gain for PID controller (np.eye(2) * kd)
+ki: 0 # Integral gain for PID controller (np.eye(2) * ki)
+
+# Display settings
+show_result_image: True # Show main image from camera
+show_bbox_image: True # Show bounding box image
+show_error_vector: True # Show line from pipette tip to desired well
+show_debug_plot: False # Show debug plot with robot trajectory and control signal
+
+# Appearance settings
+draw_prompt_circles: True # Show circles for pipette point prompt
+show_well_template: False # Show well template points
+show_well_points: True # Show detected well's center points
+show_fps: True # Show frames per second in top left corner
+
+# Logging settings
+log_level: 'DEBUG' # Logging level (In increasing level of severity: DEBUG, INFO, WARNING, ERROR, CRITICAL)
