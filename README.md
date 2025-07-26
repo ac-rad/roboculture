@@ -1,3 +1,5 @@
 # RoboCulture
 
-RoboCulture code and CAD models coming soon
+Code and CAD models available
+
+RoboCulture instructions coming soon
