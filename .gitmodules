@@ -1,3 +1,6 @@
 [submodule "FastSAM"]
 	path = FastSAM
 	url = https://github.com/ac-rad/FastSAM.git
+[submodule "digital-pipette-v2"]
+	path = digital-pipette-v2
+	url = https://github.com/ac-rad/digital-pipette-v2
