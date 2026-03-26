@@ -16,21 +16,24 @@ class ProcessWellImage:
 
         # open csv file
         # if csv file does not exist, create it and write header
-        if not os.path.exists(f'src/cell_culture/well_growth_{self.experiment_time}'):
-            os.makedirs(f'src/cell_culture/well_growth_{self.experiment_time}')
-        
-        if not os.path.exists(f'src/cell_culture/well_growth_{self.experiment_time}/well_growth.csv'):
-            with open(f'src/cell_culture/well_growth_{self.experiment_time}/well_growth.csv', 'w') as f:
+        exp_dir = f'data/well_growth_{self.experiment_time}'
+
+        if not os.path.exists(exp_dir):
+            os.makedirs(exp_dir)
+
+        if not os.path.exists(f'{exp_dir}/well_growth.csv'):
+            with open(f'{exp_dir}/well_growth.csv', 'w') as f:
                 f.write('time, iteration, well_num, avg_h, avg_s, avg_v\n')
-        with open(f'src/cell_culture/well_growth_{self.experiment_time}/well_growth.csv', 'a') as f:
+        with open(f'{exp_dir}/well_growth.csv', 'a') as f:
             # if empty, write header
             if f.tell() == 0:
                 f.write('time, iteration, well_num, avg_h, avg_s, avg_v\n')
 
-            if not os.path.exists(f'src/cell_culture/well_growth_{self.experiment_time}/{iteration}'):
-                os.makedirs(f'src/cell_culture/well_growth_{self.experiment_time}/{iteration}')
-            
-            cv2.imwrite(f'src/cell_culture/well_growth_{self.experiment_time}/{iteration}/{well_num}.png', image)
+            iter_dir = f'{exp_dir}/{iteration}'
+            if not os.path.exists(iter_dir):
+                os.makedirs(iter_dir)
+
+            cv2.imwrite(f'{iter_dir}/{well_num}.png', image)
 
             hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 

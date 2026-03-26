@@ -3,8 +3,8 @@
 This repository accompanies the paper:
 
 **RoboCulture: A Robotics Platform for Automated Biological Experimentation**  
-📄 Paper: https://arxiv.org/abs/2505.14941  
-🌐 Project website: https://ac-rad.github.io/roboculture
+Paper: https://arxiv.org/abs/2505.14941
+Project website: https://ac-rad.github.io/roboculture
 
 **RoboCulture** is a cost-effective and flexible platform
 that uses a general-purpose robotic manipulator to automate
@@ -22,6 +22,26 @@ roboculture/
 ├── digital-pipette-v2/    # Digital Pipette v2 hardware + software
 ├── cad-models/            # 3D-printable CAD assets for the yeast culture experiment
 ├── src/                   # ROS nodes and experiment code
+│   ├── calibrate_camera.py              # Camera intrinsic calibration script
+│   ├── process_well_data.py             # Generates growth curve plots from experiment CSVs
+│   ├── camera_cal_imgs/             # Chessboard calibration images and calibration.npz
+│   └── cell_culture/                # ROS package for the cell culture experiment
+│       ├── action/                  # ROS action definitions (control, perception, imaging)
+│       ├── cfg/                     # Dynamic reconfigure config files
+│       ├── config/                  # ROS launch file and parameter config (config.yaml)
+│       ├── msg/                     # ROS message definitions (PlateGrowthMsg)
+│       └── src/                     # Python source code
+│           ├── cc_control_node.py           # ROS node: robot motion and gripper control
+│           ├── cc_perception_node.py        # ROS node: vision, AprilTag, well detection
+│           ├── cell_culture_global_reconfigure.py  # Dynamic reconfigure server
+│           ├── device_controller.py         # Serial device control (pipette, shaker)
+│           ├── behaviour-tree/              # Behavior tree definitions for each experiment stage
+│           ├── behaviour/                   # Individual behavior node implementations
+│           ├── helpers/                     # Shared utilities
+│           │   └── process_well_image.py    # Captures well images and logs HSV data to CSV
+│           └── tools/
+│               └── april_tag_offset_calibrator.py  # AprilTag pose offset calibration tool
+├── data/                  # Experiment output (auto-created at runtime)
 ├── static/                # Project website files
 ├── FastSAM/               # FastSAM submodule
 └── readme-imgs/           # Images used in this README
@@ -68,13 +88,8 @@ roboculture/
 ### 1) Clone the Repository
 
 ```bash
-git clone https://github.com/ac-rad/roboculture.git
+git clone --recurse-submodules https://github.com/ac-rad/roboculture.git
 cd roboculture
-```
-
-May need to run:
-```bash
-git submodule update --init --recursive
 ```
 
 ---
@@ -85,14 +100,6 @@ git submodule update --init --recursive
 python -m venv roboculture
 source roboculture/bin/activate
 pip install -r requirements.txt
-```
-
-**Additional dependencies**
-```bash
-pip install ultralytics==8.0.120
-pip install clip
-pip install pyrealsense2
-pip install autolab-perception
 ```
 
 **FastSAM setup**
@@ -124,13 +131,13 @@ pip install autolab-perception
 1. Capture **10–15 chessboard images**
 2. Place images in:
    ```
-   camera_cal_imgs/
+   src/camera_cal_imgs/
    ```
 3. Run:
    ```bash
    python src/calibrate_camera.py
    ```
-4. Move the generated file to:
+4. The generated calibration file will be saved to:
    ```
    src/camera_cal_imgs/calibration.npz
    ```
@@ -139,6 +146,28 @@ This is the path used by the perception node.
 
 ### Pipette Calibration
 - Calibrate the Digital Pipette v2 as described in section 3.3 of [the original Digital Pipette paper](https://pubs.rsc.org/en/content/articlepdf/2023/dd/d3dd00115f)
+
+
+## Data Processing
+
+After running the experiment, well images and optical density measurements are saved to `data/well_growth_<timestamp>/well_growth.csv`.
+
+To generate the growth curve figure (Fig. 9 in the paper), run the processing script from the repo root:
+
+```bash
+pip install pandas matplotlib numpy
+python src/process_well_data.py
+```
+
+By default this reads all `well_growth.csv` files found under `../data/` and saves the outputs to `../output/`:
+- `combined_data.csv` — merged data from all experiment runs
+- `yeast_growth.pdf` — growth curves for all well groups
+- `yeast_growth_30M_derivative.pdf` — derivative of the 30M group curve
+
+**Custom paths**
+```bash
+python src/process_well_data.py --data-dir /path/to/data --output-dir /path/to/output
+```
 
 
 ## Running the Experiment
@@ -164,9 +193,9 @@ roslaunch realsense2_camera rs_camera.launch \
 
 ---
 
-### Terminal Setup
+#### Terminal Setup
 
-> **Important:** For each step below, open a **new terminal window**.
+> **Important:** Each node below requires a **new terminal window**. Run the following setup commands in each new terminal before launching a node:
 
 ```bash
 docker exec -it <your_docker_env> bash
@@ -219,19 +248,19 @@ rosrun cell_culture experiment_btree.py
 Run these **outside Docker** in separate terminals.
 
 Open dynamic reconfigure UI:
-```
+```bash
 rosrun rqt_gui rqt_gui -s reconfigure
 ```
 Open rviz to view camera outputs and image overlays for debugging:
-```
+```bash
 rviz
 ```
-Open behaviour tree visualizer:
-```
+Open behavior tree visualizer:
+```bash
 rosrun rqt_py_trees rqt_py_trees
 ```
 Plot realtime well growth:
-```
+```bash
 rqt_plot /cell_culture/plate_growth
 ```
 
