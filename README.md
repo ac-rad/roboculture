@@ -1,5 +1,7 @@
 # RoboCulture
 
+[![DOI](https://zenodo.org/badge/983898706.svg)](https://doi.org/10.5281/zenodo.19239128)
+
 This repository accompanies the paper:
 
 **RoboCulture: A Robotics Platform for Automated Biological Experimentation**  
